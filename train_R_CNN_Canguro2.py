@@ -1,4 +1,4 @@
-# fit a mask rcnn on the kangaroo dataset
+# fit a mask rcnn on the OBSEA dataset
 from os import listdir
 from xml.etree import ElementTree
 from numpy import zeros
@@ -7,15 +7,15 @@ from mrcnn.utils import Dataset
 from mrcnn.config import Config
 from mrcnn.model import MaskRCNN
 
-# class that defines and loads the kangaroo dataset
-class KangarooDataset(Dataset):
+# class that defines and loads the OBSEA dataset
+class OBSEADataset(Dataset):
 	# load the dataset definitions
 	def load_dataset(self, dataset_dir, is_train=True):
 		# define one class
-		self.add_class("dataset", 1, "kangaroo")
+		self.add_class("dataset", 1, "OBSEA")
 		# define data locations
-		images_dir = dataset_dir + '/IMG-TAG/Tagging_Img/'
-		annotations_dir = dataset_dir + '/IMG-TAG/Tagging_XML/'
+		images_dir = dataset_dir + '/Tagging_Img/'
+		annotations_dir = dataset_dir + '/Tagging_XML/'
 		# find all images
 		for filename in listdir(images_dir):
 			# extract image id
@@ -71,7 +71,7 @@ class KangarooDataset(Dataset):
 			row_s, row_e = box[1], box[3]
 			col_s, col_e = box[0], box[2]
 			masks[row_s:row_e, col_s:col_e, i] = 1
-			class_ids.append(self.class_names.index('kangaroo'))
+			class_ids.append(self.class_names.index('OBSEA'))
 		return masks, asarray(class_ids, dtype='int32')
 
 	# load an image reference
@@ -80,22 +80,22 @@ class KangarooDataset(Dataset):
 		return info['path']
 
 # define a configuration for the model
-class KangarooConfig(Config):
+class OBSEAConfig(Config):
 	# define the name of the configuration
-	NAME = "kangaroo_cfg"
-	# number of classes (background + kangaroo)
+	NAME = "OBSEA_cfg"
+	# number of classes (background + OBSEA)
 	NUM_CLASSES = 1 + 1
 	# number of training steps per epoch
 	STEPS_PER_EPOCH = 131
 
 # prepare train set
-train_set = KangarooDataset()
-train_set.load_dataset('kangaroo', is_train=True)
+train_set = OBSEADataset()
+train_set.load_dataset('OBSEA', is_train=True)
 train_set.prepare()
 print('Train: %d' % len(train_set.image_ids))
 # prepare test/val set
 test_set = KangarooDataset()
-test_set.load_dataset('kangaroo', is_train=False)
+test_set.load_dataset('OBSEA', is_train=False)
 test_set.prepare()
 print('Test: %d' % len(test_set.image_ids))
 # prepare config
