@@ -1,7 +1,7 @@
 # Model Mask - RCNN  
 ## Object Detection with Mask R-CNN Keras model
   
-The aim of this repository is to train a neural network capable of detecting fish from the image dataset of the underwater laboratory [OBSEA](https://www.obsea.es), linked to the research group [SARTI](https ://www.sarti.webs.upc.edu/web_v2/).
+The aim of this repository is to train a neural network capable of detecting fish from the image dataset of the underwater laboratory [OBSEA](https://www.obsea.es), linked to the research group [SARTI](https://www.sarti.webs.upc.edu/web_v2/).
   
 The implemented code is based on the [Mask R-CNN repository for the detection and segmentation object](https://github.com/matterport/Mask_RCNN.git). Additional information can be found at [their website](https://machinelearningmastery.com/how-to-train-an-object-detection-model-with-keras/).
 
