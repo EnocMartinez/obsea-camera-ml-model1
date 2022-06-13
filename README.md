@@ -9,7 +9,9 @@ Previous steps required:
 - Virtual environment with Python 3.6.
 - Install requeriments.txt (principalment Keras == 2.2.4 & Tensor Flow == 1.15.3).
 
-	`pip install requeriments.txt`
+	```
+	> pip install requeriments.txt
+	```
   
 - Install Mask R-CNN for Keras:
 	1.  Git Clone [Mask R-CNN GitHub Repository](https://github.com/matterport/Mask_RCNN.git).
