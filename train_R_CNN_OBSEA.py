@@ -24,10 +24,10 @@ class OBSEADataset(Dataset):
 			if image_id in ['00090']:
 				continue
 			# skip all images after 150 if we are building the train set
-			if is_train and int(image_id) >= 3368:
+			if is_train and int(image_id) >= 3366:
 				continue
 			# skip all images before 150 if we are building the test/val set
-			if not is_train and int(image_id) < 3368:
+			if not is_train and int(image_id) < 3366:
 				continue
 			img_path = images_dir + filename
 			ann_path = annotations_dir + image_id + '.xml'
@@ -86,7 +86,7 @@ class OBSEAConfig(Config):
 	# number of classes (background + OBSEA)
 	NUM_CLASSES = 1 + 1
 	# number of training steps per epoch
-	STEPS_PER_EPOCH = 131
+	STEPS_PER_EPOCH = 3366
 
 # prepare train set
 train_set = OBSEADataset()
