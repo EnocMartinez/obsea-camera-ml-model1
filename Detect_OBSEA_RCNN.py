@@ -11,11 +11,14 @@ from mrcnn.config import Config
 from mrcnn.model import MaskRCNN
 from mrcnn.model import mold_image
 from mrcnn.utils import Dataset
-import numpy as np
+# import numpy as np
 import json
 from tqdm.auto import tqdm
 from rich import print as rprint
 import time
+
+
+STEPS_PER_EPOCH = 3366
 
 
 # class that defines and loads the OBSEA dataset
@@ -25,13 +28,13 @@ class OBSEADataset(Dataset):
 		# define one class
 		self.add_class("dataset", 1, "OBSEA")
 		# define data locations
-		images_dir = dataset_dir + '/Tagging_Img_8000_2013_n/'
-		annotations_dir = dataset_dir + '/Tagging_XML_8000_2013_n/'
+		images_dir = dataset_dir + '/Tagging_Img/'
+		annotations_dir = dataset_dir + '/Tagging_XML/'
 		# find all images
 		'''Modificació'''
 		# print(sorted(listdir(images_dir), key=lambda s:int(s.split('.')[0])))
 
-		for filename in sorted(listdir(images_dir), key=lambda s:int(s.split('.')[0])):
+		for filename in sorted(listdir(images_dir), key=lambda s: int(s.split('.')[0])):
 			print(filename)
 			# extract image id
 			image_id = filename[:-4]
@@ -39,10 +42,10 @@ class OBSEADataset(Dataset):
 			if image_id in ['090']:
 				continue
 			# skip all images after 150 if we are building the train set
-			if is_train and int(image_id) >= 1:
+			if is_train and int(image_id) >= STEPS_PER_EPOCH:
 				continue
 			# skip all images before 150 if we are building the test/val set
-			if not is_train and int(image_id) < 1:
+			if not is_train and int(image_id) < STEPS_PER_EPOCH:
 				continue
 			img_path = images_dir + filename
 			ann_path = annotations_dir + image_id + '.xml'
@@ -192,7 +195,7 @@ def plot_actual_vs_predicted_2(dataset, model, cfg, type_dataset, n_images=10):
 		# archivo_json.close()
 
 		# define subplot
-		pyplot.subplot(1, 2, 1)#, i*2+1)
+		pyplot.subplot(1, 2, 1)
 		# plot raw pixel data
 		pyplot.imshow(image)
 		pyplot.title('Actual')
@@ -217,7 +220,8 @@ def plot_actual_vs_predicted_2(dataset, model, cfg, type_dataset, n_images=10):
 			# print(rect)
 			# draw the box
 			ax.add_patch(rect)
-		#rect.remove()
+
+		# rect.remove()
 		time7 = time.time() - t
 		t = time.time()
 		# show the figure
@@ -281,5 +285,5 @@ plot_actual_vs_predicted_2(train_set, model, cfg, type_dataset='train', n_images
 # plot predictions for test dataset
 plot_actual_vs_predicted_2(test_set, model, cfg, type_dataset='test', n_images=len(test_set.image_ids))
 
-#plot_actual_vs_predicted(train_set, model, cfg)
-#plot_actual_vs_predicted(test_set, model, cfg)
+# plot_actual_vs_predicted(train_set, model, cfg)
+# plot_actual_vs_predicted(test_set, model, cfg)

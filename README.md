@@ -1,4 +1,3 @@
-
 # Model Mask - RCNN  
 ## Object Detection with Mask R-CNN Keras model
   
@@ -21,8 +20,8 @@ The implemented code is based on the [Mask R-CNN repository for the detection an
 		.\env\Scripts\activate
 		```
 
-- #### Install requeriments.txt (principalment Keras == 2.2.4 & Tensor Flow == 1.15.3).
-	```python
+- #### Install requirements.txt (Keras == 2.2.4 & Tensor Flow == 1.15.3).
+	```
 	pip install -r /path/to/requirements.txt
 	```
 
@@ -39,12 +38,12 @@ The implemented code is based on the [Mask R-CNN repository for the detection an
 		> cd Mask_RCNN
 		> python setup.py install
 		```
-		*S'ha de moure la carpeta mrcnn, que esta dinas de la carpeta intalada mask_rcnn, a l'entorn virtual.*
+		***S'ha de moure la carpeta mrcnn, que esta dinas de la carpeta intalada mask_rcnn, a l'entorn virtual.***
 	4. Confirm the Library Was Installed
 		``` 
 		> pip show mask-rcnn
 		```
-- #### Download the weigths file of Mask R-CNN model [here](https://github.com/matterport/Mask_RCNN/releases/download/v2.0/mask_rcnn_coco.h5).
+- #### Download the weights file of Mask R-CNN model [here](https://github.com/matterport/Mask_RCNN/releases/download/v2.0/mask_rcnn_coco.h5).
 - #### Install [Dataset OBSEA](https://github.com/uripratt/OBSEA-dataset/tree/master).
 	``` { py }
 	> git clone https://github.com/uripratt/OBSEA-dataset/tree/master
@@ -70,7 +69,12 @@ Execute train_R_CNN_OBSEA.py
 
 ### Detect Objects
 
-To detect objects it is necessary to run the Detect_OBSEA_RCNN.py code, in this case a dataset with which the model has not been trained is used. In this case this dataset has been used.
+To detect objects it is necessary to run the code Detect_OBSEA_RCNN.py, in this case it has been trained with 10% of the images explained above (also used to validate the model). Therefore, the "STEPS_PER_EPOCH" paramater has to have the same value.
+
+If the user wants to detect with another dataset, the following parameters must be changed:
+
+***Explicar més endevant***
+
 
  
 [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_UPC.svg/1200px-Logo_UPC.svg.png" alt="drawing" width="200"/>](https://www.upc.edu/ca)	
