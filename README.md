@@ -44,12 +44,12 @@ The implemented code is based on the [Mask R-CNN repository for the detection an
 	```
 
 ### Train Model
-Change the "NUM_IMG_TRAIN" and "STEPS_PER_EPOCH" parametres if you will change the original DataSet:
+Change the "STEPS_PER_EPOCH" parameter if you will change the original DataSet:
 Depending on the total number of photos in the dataset, it is necessary to separate approximately 90% for training and 10% to validation the model. In the present case a total of 3366 photos are trained. 
 
 
 ```
-NUM_IMG_TRAIN = 3366
+STEPS_PER_EPOCH = 3366
 class OBSEADataset(Dataset):  
 	   # load the dataset definitions  
 	  def load_dataset(self, dataset_dir, is_train=True):  
@@ -66,10 +66,10 @@ class OBSEADataset(Dataset):
 	  if image_id in ['00090']:  
 	            continue  
 	  # skip all images after 3368 if we are building the train set  
-	  if is_train and int(image_id) >= NUM_IMG_TRAIN:  
+	  if is_train and int(image_id) >= STEPS_PER_EPOCH:  
 	            continue  
 	  # skip all images before 3368 if we are building the test/val set  
-	  if not is_train and int(image_id) < NUM_IMG_TRAIN:  
+	  if not is_train and int(image_id) < STEPS_PER_EPOCH:  
 	            continue  
 	  img_path = images_dir + filename  
 	         ann_path = annotations_dir + image_id + '.xml'  
@@ -85,7 +85,7 @@ class OBSEAConfig(Config):
 		NUM_CLASSES = 1 + 1  
 		# number of training steps per epoch
 		# STEPS_PER_EPOCH = number of training photos  
-		STEPS_PER_EPOCH = 3366
+		STEPS_PER_EPOCH = STEPS_PER_EPOCH
  ```
 
 Execute train_R_CNN_OBSEA.py
