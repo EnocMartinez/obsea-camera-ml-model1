@@ -7,6 +7,9 @@ from mrcnn.utils import Dataset
 from mrcnn.config import Config
 from mrcnn.model import MaskRCNN
 
+
+STEPS_PER_EPOCH = 3366
+
 # class that defines and loads the OBSEA dataset
 class OBSEADataset(Dataset):
 	# load the dataset definitions
@@ -24,10 +27,10 @@ class OBSEADataset(Dataset):
 			if image_id in ['00090']:
 				continue
 			# skip all images after 150 if we are building the train set
-			if is_train and int(image_id) >= 3366:
+			if is_train and int(image_id) >= (STEPS_PER_EPOCH + 2):
 				continue
 			# skip all images before 150 if we are building the test/val set
-			if not is_train and int(image_id) < 3366:
+			if not is_train and int(image_id) < (STEPS_PER_EPOCH + 2):
 				continue
 			img_path = images_dir + filename
 			ann_path = annotations_dir + image_id + '.xml'
@@ -86,7 +89,7 @@ class OBSEAConfig(Config):
 	# number of classes (background + OBSEA)
 	NUM_CLASSES = 1 + 1
 	# number of training steps per epoch
-	STEPS_PER_EPOCH = 3366
+	STEPS_PER_EPOCH = STEPS_PER_EPOCH
 
 # prepare train set
 train_set = OBSEADataset()
