@@ -66,10 +66,10 @@ class OBSEADataset(Dataset):
 	  if image_id in ['00090']:  
 	            continue  
 	  # skip all images after 3368 if we are building the train set  
-	  if is_train and int(image_id) >= steps_epoch:  
+	  if is_train and int(image_id) >= NUM_IMG_TRAIN:  
 	            continue  
 	  # skip all images before 3368 if we are building the test/val set  
-	  if not is_train and int(image_id) < steps_epoch:  
+	  if not is_train and int(image_id) < NUM_IMG_TRAIN:  
 	            continue  
 	  img_path = images_dir + filename  
 	         ann_path = annotations_dir + image_id + '.xml'  
