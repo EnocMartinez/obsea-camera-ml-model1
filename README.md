@@ -44,11 +44,12 @@ The implemented code is based on the [Mask R-CNN repository for the detection an
 	```
 
 ### Train Model
-Change the nexts parametres if you will change the original DataSet:
-Depending on the total number of photos in the dataset, it is necessary to separate approximately 90% for training and 10% to validation the model.  In the present case a total of 3366 photos are trained. 
+Change the "NUM_IMG_TRAIN" and "STEPS_PER_EPOCH" parametres if you will change the original DataSet:
+Depending on the total number of photos in the dataset, it is necessary to separate approximately 90% for training and 10% to validation the model. In the present case a total of 3366 photos are trained. 
 
 
 ```
+NUM_IMG_TRAIN = 3366
 class OBSEADataset(Dataset):  
 	   # load the dataset definitions  
 	  def load_dataset(self, dataset_dir, is_train=True):  
@@ -65,10 +66,10 @@ class OBSEADataset(Dataset):
 	  if image_id in ['00090']:  
 	            continue  
 	  # skip all images after 3368 if we are building the train set  
-	  if is_train and int(image_id) >= 3366:  
+	  if is_train and int(image_id) >= steps_epoch:  
 	            continue  
 	  # skip all images before 3368 if we are building the test/val set  
-	  if not is_train and int(image_id) < 3366:  
+	  if not is_train and int(image_id) < steps_epoch:  
 	            continue  
 	  img_path = images_dir + filename  
 	         ann_path = annotations_dir + image_id + '.xml'  
