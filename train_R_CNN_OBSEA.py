@@ -10,6 +10,7 @@ from mrcnn.model import MaskRCNN
 
 STEPS_PER_EPOCH = 3366
 
+
 # class that defines and loads the OBSEA dataset
 class OBSEADataset(Dataset):
 	# load the dataset definitions
@@ -82,6 +83,7 @@ class OBSEADataset(Dataset):
 		info = self.image_info[image_id]
 		return info['path']
 
+
 # define a configuration for the model
 class OBSEAConfig(Config):
 	# define the name of the configuration
@@ -90,6 +92,7 @@ class OBSEAConfig(Config):
 	NUM_CLASSES = 1 + 1
 	# number of training steps per epoch
 	STEPS_PER_EPOCH = STEPS_PER_EPOCH
+
 
 # prepare train set
 train_set = OBSEADataset()
