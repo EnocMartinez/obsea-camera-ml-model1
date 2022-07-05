@@ -2,6 +2,8 @@
 import os.path
 from os import listdir
 from xml.etree import ElementTree
+
+import numpy as np
 from numpy import zeros
 from numpy import asarray
 from numpy import expand_dims
@@ -175,6 +177,10 @@ def plot_actual_vs_predicted_2(dataset, model, cfg, type_dataset, n_images=10):
 		time5 = time.time()-t
 		t = time.time()
 
+		for key, value in yhat.items():
+			if type(value) == np.ndarray:
+				yhat[key] == yhat[key].tolist()
+
 		'''Modificació'''
 		folder = './Detection_RCNN_json/'
 		if not os.path.exists(folder):
@@ -189,10 +195,6 @@ def plot_actual_vs_predicted_2(dataset, model, cfg, type_dataset, n_images=10):
 		tf.close()
 		time6 = time.time() - t
 		t = time.time()
-		# data_json = json.dumps(str(yhat))
-		# archivo_json = open(data_json, "w")
-		# archivo_json.write(name_json)
-		# archivo_json.close()
 
 		# define subplot
 		pyplot.subplot(1, 2, 1)
