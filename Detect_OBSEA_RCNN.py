@@ -185,7 +185,7 @@ def plot_actual_vs_predicted_2(dataset, model, cfg, type_dataset, n_images=10):
 		name_json = f'{folder}RCNN_{i + 1}.json'
 
 		tf = open(name_json, "w")
-		json.dump(str(yhat), tf)
+		json.dump(yhat, tf)
 		tf.close()
 		time6 = time.time() - t
 		t = time.time()
